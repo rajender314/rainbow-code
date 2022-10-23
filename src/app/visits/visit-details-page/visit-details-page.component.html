@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border header-border">
+		<ion-toolbar class="ion-no-border">
+			<ion-buttons slot="start">
+				<ion-button (click)="close();">
+					<ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+					<!-- <ion-icon name="close" slot="icon-only"></ion-icon> --></ion-button>
+			</ion-buttons>
+			<ion-title>{{title}}</ion-title>
+		</ion-toolbar>
+	</ion-header>
+	<ion-content>
+		<div class="ion-padding white-bg sectionClass">
+			<form [formGroup]="formGroup" class="form-width">
+				<ion-grid>
+					<ion-row>
+						<ion-col>
+							<mat-form-field appearance="outline" class="store-name-width">
+								<mat-label>Store Name</mat-label>
+								<input matInput formControlName="name" [readonly]="readOnly" /> </mat-form-field>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<mat-form-field appearance="outline">
+								<mat-label>Dhanush ID </mat-label>
+								<input matInput formControlName="outlet_id" [readonly]="true" /> </mat-form-field>
+						</ion-col>
+						<ion-col>
+							<mat-form-field appearance="outline">
+								<mat-label>WD ID </mat-label>
+								<input matInput formControlName="wd_id" [readonly]="true" /> </mat-form-field>
+						</ion-col>
+						<ion-col>
+							<mat-form-field appearance="outline">
+								<mat-label>Market Name</mat-label>
+								<input matInput formControlName="market_name" [readonly]="readOnly" /> </mat-form-field>
+						</ion-col>
+						<ion-col>
+							<mat-form-field appearance="outline">
+								<mat-label>Merchandiser Name </mat-label>
+								<input matInput formControlName="merchandiser_name" [readonly]="true" /> </mat-form-field>
+						</ion-col>
+						<ion-col>
+							<mat-form-field appearance="outline">
+								<mat-label>Visited On</mat-label>
+								<input matInput formControlName="created_at" [readonly]="readOnly" /> </mat-form-field>
+						</ion-col>
+						<ion-col>
+							<mat-form-field appearance="outline">
+								<mat-label>Beat Name</mat-label>
+								<input matInput formControlName="beat_name" [readonly]="readOnly" /> </mat-form-field>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</form>
+			<div class="accordian-width" *ngIf="allowDataPass">
+				<adj-visit-images [visitObject]="imagesParameters"></adj-visit-images>
+				<adj-visit-images [visitObject]="postImagesParameters"></adj-visit-images>
+
+				<adj-visit-deatil-grid [pageData]="outletHealthData"></adj-visit-deatil-grid>
+				<adj-visit-deatil-grid [pageData]="elePresenceArray"></adj-visit-deatil-grid>
+				<adj-visit-deatil-grid [pageData]="assetReportArray"></adj-visit-deatil-grid>
+				<adj-visit-deatil-grid [pageData]="stockAvailableArray"></adj-visit-deatil-grid>
+				<adj-visit-deatil-grid [pageData]="kdeChangeReqArray"></adj-visit-deatil-grid>
+			</div>
+		</div>
+	</ion-content>

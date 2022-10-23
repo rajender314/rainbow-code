@@ -1,0 +1,112 @@
+<div>
+  <div class="ion-padding-horizontal">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-right">
+            
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <rainbow-body>
+    <adjoint-paginated-list [config]="paginatedListConfig" [lgTemplate]="storeTemplate" [mapFn]="mapData"
+      (onContent)="handleResponse($event)">
+    </adjoint-paginated-list>
+  </rainbow-body>
+</div>
+
+
+
+<ng-template #storeTemplate let-results="results">
+  <div class="ion-padding-horizontal">
+    <div class="ion-padding-bottom mild small-font" *ngIf="totalRecords">
+      {{'Total Records' | uppercase}} - {{totalRecords}}
+    </div>
+    <ion-grid *ngIf="results" class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+      <ion-row class="grid-header sticky-header">
+        <ion-col size="auto" style="opacity: 1;">
+          <!-- <span>
+            <ion-checkbox [(ngModel)]="selectAll" (ngModelChange)="handleAllSelectionChange();"></ion-checkbox>
+          </span> -->
+        </ion-col>
+        <ion-col size="2"><span>{{'Store Name'}}</span></ion-col>
+        <ion-col><span>{{'Type'}}</span></ion-col>
+        <ion-col><span>{{'Contact No.'}}</span></ion-col>
+        <ion-col><span>{{'Branch'}}</span></ion-col>
+        <ion-col><span>{{'Market Name'}}</span></ion-col>
+        <ion-col><span>{{'WD ID'}}</span></ion-col>
+        <ion-col><span>{{'Beat'}}</span></ion-col>
+        <ion-col><span>{{'Merchandiser'}}</span></ion-col>
+        <ion-col><span>{{'Visited'}}</span></ion-col>
+        <!-- <ion-col><span>{{'Status'}}</span></ion-col> -->
+        <ion-col size="auto">
+          <span>
+            <ion-button fill="clear" class="invisible">
+              <ion-icon name="ellipsis-vertical-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let store of results" class="white-bg ion-align-items-center">
+        <ion-col size="auto">
+          <!-- <div>
+            <ion-checkbox [(ngModel)]="store.selected"></ion-checkbox>
+          </div> -->
+        </ion-col>
+        <ion-col size="2" >
+          <div>
+            <div>{{store.name}}</div>
+            <div class="small-font mild" style="margin-top:4px;">{{store.outlet_id}}</div>
+          </div>
+        </ion-col>
+        <ion-col >
+          <div>{{store.outlet_type}}</div>
+        </ion-col>
+        <ion-col >
+          <div>{{store.contact_no}}</div>
+        </ion-col>
+        <ion-col >
+          <div>{{store.branch}}</div>
+        </ion-col>
+        <ion-col >
+          <div>{{store.market_name}}</div>
+        </ion-col>
+        <ion-col >
+          <div>{{store.wd_id}}</div>
+        </ion-col>
+        <ion-col >
+          <div>
+            <div>
+              {{store.beat_name}}
+            </div>
+          </div>
+        </ion-col>
+        <ion-col >
+          <div>{{store.merchandiser_name}}</div>
+        </ion-col>
+        <ion-col >
+          <div>
+            {{store.created_at | date}}
+          </div>
+        </ion-col>
+        <!-- <ion-col >
+          <div>
+            <ion-chip class="ion-no-margin" [color]="store.store_status ? 'success' : 'danger' ">
+              <ng-container *ngIf="store.store_status">Active</ng-container>
+              <ng-container *ngIf="!store.store_status">Inactive</ng-container>
+            </ion-chip>
+          </div>
+        </ion-col> -->
+        <ion-col size="auto">
+          <div class="ion-text-right">
+            <ion-button color="dark" fill="clear">
+              <ion-icon name="ellipsis-vertical-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ng-template>

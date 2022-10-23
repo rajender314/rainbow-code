@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="end">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="main-image-section">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="auto">
+          <ion-button fill="clear" style="margin-top: 180px;">
+            <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <div>
+            <div style="text-align: center; font-weight: bold;">{{selectedImageName}}</div>
+            <img [src]="selectedImgUrl" height="400px" width="750px"/>
+          </div>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" style="margin-top: 180px;">
+            <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+  <div class="footer-section">
+
+    <div style="white-space: nowrap;overflow-x: scroll;">
+      <div style="display: inline-block;" *ngFor="let url of imageURLs.results">
+        <div style="text-align: center; font-weight: bold;">{{url.image_name}}</div>
+        <img [src]="url.image_src" width="160px" height="150px" style="padding: 12px;" (click)="showSelectedImage(url.image_src, url.image_name)" />
+      </div>
+    </div>
+  </div>
+
+</ion-content>

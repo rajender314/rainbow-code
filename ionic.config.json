@@ -1,0 +1,7 @@
+{
+  "name": "Upsell-PWA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

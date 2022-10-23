@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="end">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-padding white-bg" style="min-height: 100%;">
+    <form [formGroup]="formGroup">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <adj-file-upload formControlName="file" [accept]="fileType"></adj-file-upload>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="ion-padding-vertical" *ngIf="(fileControl.dirty || fileControl.touched) && fileControl.errors">
+              <ion-text color="danger" class="small-font">Please select a {{fileType}} file</ion-text>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="ion-margin-vertical ion-padding-vertical">
+              <ion-button type="submit" size="block" (click)="submit();">Upload</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

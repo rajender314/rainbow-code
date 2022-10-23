@@ -1,0 +1,110 @@
+<div>
+  <ion-grid>
+    <ion-row class="ion-padding-vertical">
+      <ion-col>
+        <div class="ion-text-left ion-margin-bottom">
+          <div>
+            <ion-grid class="ion-no-padding">
+              <ion-row class="ion-align-items-center">
+                <ion-col size="6">
+                  <div class="white-bg search-bar">
+                    <ion-icon name="search-outline" class="mild"></ion-icon>
+                    <input type="text" [formControl]="searchInput" placeholder="Search with user name, mobile or id..."
+                      (keydown.enter)="performSearch();">
+                  </div>
+                </ion-col>
+                <!-- <ion-col>
+                  <adj-multi-select #groups name="groups" [url]="apiDirectory.users" mapFn="response=>response.results"
+                    type="server" [multiple]="false" idPropName="id" labelPropName="name"
+                    (selected)="viewUser(null,$event)" [chips]="false">
+                  </adj-multi-select>
+                </ion-col> -->
+                <ion-col class="ion-padding-horizontal">
+                  <ion-button (click)="performSearch();" size="small" fill="outline">Search</ion-button>
+                  <ion-button (click)="clear();" size="small" fill="outline">Clear</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-right">
+          <ion-button size="small" [fill]="filter && filter.isNotEmpty()? 'solid': 'outline'"
+            (click)="showFilter($event)">
+            <ion-icon name="funnel-outline" slot="start">
+            </ion-icon>
+            Filter
+          </ion-button>
+          <ion-button size="small" fill="outline" (click)="showStatusOptions($event)">
+            {{status.label}}
+          </ion-button>
+          <ion-button size="small" fill="outline" (click)="sort($event)">
+            {{sortParam.option.label}}
+            <ion-icon slot="end" [name]="sortParam.order == 'ASC'? 'arrow-down-outline' : 'arrow-up-outline'">
+            </ion-icon>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <rainbow-body>
+    <adjoint-paginated-list [config]="paginatedListConfig" [lgTemplate]="usersTemplate" [mapFn]="mapUser"
+      (onContent)="handleResponse($event)">
+    </adjoint-paginated-list>
+  </rainbow-body>
+</div>
+
+<ng-template #usersTemplate let-results="results">
+  <div>
+    <div class="ion-padding-bottom mild small-font" *ngIf="totalRecords">
+      {{'Total Users'}} - {{totalRecords}}
+    </div>
+    <ion-grid *ngIf="results" class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+      <ion-row class="grid-header sticky-header">
+        <ion-col><span>{{'Name'}}</span></ion-col>
+        <ion-col><span>{{'Mobile'}}</span></ion-col>
+        <ion-col><span>{{'Location'}}</span></ion-col>
+        <ion-col><span>{{'Status'}}</span></ion-col>
+        <ion-col size="auto">
+          <span>
+            <ion-button fill="clear" color="dark" style="opacity: 0;max-height: 1px;">
+              <ion-icon name="ellipsis-vertical-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let user of results" class="white-bg ion-align-items-center" (click)="viewUser($event, user);">
+        <ion-col>
+          <div>
+            <div>{{user.name}}</div>
+            <div class="small-font mild small-margin-top">ID:{{user.user_id}} | {{user.role?.name}}</div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>{{user.mobile_number}}</div>
+        </ion-col>
+        <ion-col>
+          <div>{{user.place?.name}}</div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-chip [color]="user.is_active ? 'success' : 'danger' ">
+              <ng-container *ngIf="user.is_active">Active</ng-container>
+              <ng-container *ngIf="!user.is_active">Inactive</ng-container>
+            </ion-chip>
+          </div>
+        </ion-col>
+        <ion-col size="auto">
+          <div>
+            <ion-button fill="clear" color="dark" (click)="showUserActions($event, user);">
+              <ion-icon name="ellipsis-vertical-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+
+
+      </ion-row>
+    </ion-grid>
+  </div>
+</ng-template>

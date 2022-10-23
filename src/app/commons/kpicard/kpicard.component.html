@@ -1,0 +1,73 @@
+
+<div border-box class="ion-padding ion-margin mat-elevation-z2" [ngClass]="{'primary-background':options.primary}"
+  style="height: calc(100% - 32px);">
+  <div *ngIf="options">
+    <div>
+      <ion-grid class="ion-no-padding">
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col>
+            <h4 class="ion-no-margin mild light">{{options.name}}</h4>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-button style="margin-right:-16px" class="mild" size="small" fill="clear"
+              [color]="options.primary?'light' : 'dark'" (click)="refresh();">
+              <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col>
+            <div class="note-text extra-light extra-mild">{{options.description}}</div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </div>
+    <rainbow-body>
+      <div class="ion-margin-vertical">
+        <div *ngIf="kpiReport" class="ion-padding-vertical ion-margin-vertical">
+
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-align-items-baseline">
+              <ion-col>
+                <h1 class="large-font ion-no-margin">
+                  <span *ngIf="options.role.type == 'currency'">
+                    {{ kpiOrderNumber | currency:'INR':'symbol-narrow' }}
+                  </span>
+                  <span *ngIf="options.role.type == 'number'">
+                    {{ kpiOrderNumber}}
+                  </span>
+                  <span>
+                    <ion-icon style="vertical-align: middle;" *ngIf="kpiReport.growth >= 0" name="arrow-up-outline"
+                      color="success"></ion-icon>
+                    <ion-icon style="vertical-align: middle;" *ngIf="kpiReport.growth < 0" name="arrow-down-outline"
+                      color="danger"></ion-icon>
+                  </span>
+                </h1>
+                <div class="extra-light mildest" *ngIf="options.role.description">
+                  {{options.role.description}}
+                </div>
+              </ion-col>
+
+
+              <ion-col size="auto" *ngIf="kpiReport.growth >=0 || kpiReport.growth < 0" class="ion-text-right">
+                <h1 class="large-font mild light ion-no-margin">
+                  {{kpiReport.growth | number:'1.2-2'}}&#x25;
+                </h1>
+                <div class="extra-light mildest extra-small-font">OVER PAST DURATION</div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+        </div>
+
+        <div>
+          <div class="ion-margin">
+            <canvas #kpiChart></canvas>
+          </div>
+        </div>
+      </div>
+    </rainbow-body>
+  </div>
+</div>

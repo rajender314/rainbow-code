@@ -1,0 +1,22 @@
+<div *ngIf="currentState">
+  <ng-container *ngTemplateOutlet="largeScreen;context:{currentState:currentState}">
+  </ng-container>
+  <ion-infinite-scroll threshold="200px" (ionInfinite)="loadList($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</div>
+
+<ng-template #mobileScreen let-currentState="currentState">
+  <ng-container *ngIf="smTemplate">
+    <ng-container *ngTemplateOutlet="smTemplate;context:{results:currentState.results}">
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #largeScreen let-currentState="currentState">
+  <ng-container *ngIf="lgTemplate">
+    <ng-container *ngTemplateOutlet="lgTemplate;context:{results:currentState.results}">
+    </ng-container>
+  </ng-container>
+</ng-template>

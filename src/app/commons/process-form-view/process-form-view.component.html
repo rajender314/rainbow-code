@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="end">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="task">{{task.task_name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="white-bg">
+  <div class="ion-padding white-bg">
+    <div class="ion-padding-horizontal">
+      <h1 *ngIf="task" class="bold light-mild">Assignment</h1>
+      <div class="mild-light">
+        <span>{{task.instance.process.name}} <span class="light mild extra-small-font">&nbsp;
+            {{'Process' | uppercase}}</span>&nbsp;/&nbsp;</span>
+        <span>{{task.task_name}} <span class="light mild extra-small-font">&nbsp;
+            {{'Step' | uppercase}}</span></span>
+      </div>
+    </div>
+    <div class="secondary-info ion-margin">
+      <p class="mild" *ngIf="task.instance.data['store_id']">Store Id = {{task.instance.data['store_id']}}</p>
+      <p class="mild" *ngIf="task.instance.data['store_name']">Store = {{task.instance.data['store_name']}}</p>
+      <p class="mild" *ngIf="task.instance.data['salesman_name']">Salesman =
+        {{task.instance.data['salesman_name']}}</p>
+    </div>
+    <form [formGroup]="formGroup">
+      <div border-box class="ion-padding-horizontal ion-padding-top ion-margin-top">
+        <div *ngFor="let field of task.form.fields" class="ion-margin-bottom">
+          <mat-form-field appearance="outline">
+            <mat-label>{{toCamelcase(field.field_name)}} <ion-icon name="star" class="small-font"
+                *ngIf="field.required"></ion-icon>
+            </mat-label>
+            <textarea matInput [readonly]="true" [formControlName]="field.field_name" placeholder=""></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="ion-padding-horizontal">
+      <p class="mild small-font">
+        Submitted at {{task.updated_at | date:'medium'}} <span *ngIf="task.submitted_by">by
+          {{task.submitted_by.name}}</span>
+      </p>
+    </div>
+  </div>
+
+
+</ion-content>

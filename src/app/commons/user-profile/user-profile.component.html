@@ -1,0 +1,4 @@
+<ion-button color="primary" fill="clear" *ngIf="user" (click)="showOptions($event);">
+  <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+  {{user.user_name}}
+</ion-button>

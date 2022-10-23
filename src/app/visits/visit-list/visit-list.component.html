@@ -1,0 +1,149 @@
+<div>
+	<div class="ion-padding-horizontal">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-right">
+						<ion-grid class="ion-no-padding">
+							<ion-row class="ion-align-items-center">
+								<ion-col size="8">
+									<div class="white-bg search-bar">
+										<ion-icon name="search-outline" class="mild"></ion-icon>
+										<input type="text" [formControl]="searchInput"
+											placeholder="Search with store name, mobile or id...">
+									</div>
+								</ion-col>
+
+								<ion-col class="ion-padding-horizontal">
+									<ion-button class="srch_clear" (click)="performSearch();" size="small" fill="outline">Search
+									</ion-button>
+									<ion-button class="srch_clear" (click)="clear();" size="small" fill="outline">Clear</ion-button>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</div>
+				</ion-col>
+
+				<ion-col>
+					<div class="ion-text-right">
+						<!-- <ion-button (click)="exportReport();" size="small" fill="outline">
+	<div class="ion-padding-horizontal">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="ion-text-right">
+						<ion-grid class="ion-no-padding">
+							<ion-row class="ion-align-items-center">
+								<ion-col size="8">
+									<div class="white-bg search-bar">
+										<ion-icon name="search-outline" class="mild"></ion-icon>
+										<input type="text" [formControl]="searchInput" placeholder="Search with store name, mobile or id..."> </div>
+								</ion-col>
+								<ion-col class="ion-padding-horizontal">
+									<ion-button (click)="performSearch();" size="small" fill="outline">Search</ion-button>
+									<ion-button (click)="clear();" size="small" fill="outline">Clear</ion-button>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</div>
+				</ion-col>
+				<ion-col>
+					<div class="ion-text-right">
+						<!-- <ion-button (click)="exportReport();" size="small" fill="outline">
+              Download
+              <ion-icon name="download-outline" slot="start">
+              </ion-icon>
+            </ion-button> -->
+						<ion-button (click)="showVisitDetails()" size="small" fill="outline"> Filter
+							<ion-icon name="filter-outline" slot="start"> </ion-icon>
+						</ion-button>
+						<ion-button size="small" fill="outline" (click)="exportVisits($event)"> Download
+							<ion-icon name="caret-down-outline"></ion-icon>
+						</ion-button>
+						<ion-button size="small" fill="outline" (click)="showDateOptions($event);">
+							<ion-icon name="calendar-outline" slot="start"></ion-icon> ENTIRE RANGE
+						</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+	<rainbow-body>
+		<adjoint-paginated-list [config]="paginatedListConfig" [lgTemplate]="storeTemplate" [mapFn]="mapData"
+			(onContent)="handleResponse($event)"> </adjoint-paginated-list>
+	</rainbow-body>
+</div>
+
+
+<ng-template #storeTemplate let-results="results">
+	<div class="ion-padding-horizontal">
+		<div class="ion-padding-bottom mild small-font" *ngIf="totalRecords"> {{'Total Records' | uppercase}} -
+			{{totalRecords}} </div>
+		<ion-grid *ngIf="results" class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+			<ion-row class="grid-header sticky-header">
+				<!-- <ion-col size="auto" style="opacity: 1;">
+          <span>
+            <ion-checkbox [(ngModel)]="selectAll" (ngModelChange)="handleAllSelectionChange();"></ion-checkbox>
+          </span>
+        </ion-col> -->
+				<ion-col size="2"><span>{{'Store Name'}}</span></ion-col>
+				<!-- <ion-col><span>{{'Branch'}}</span></ion-col> -->
+				<ion-col><span>{{'Market Name'}}</span></ion-col>
+				<ion-col><span>{{'RA Type'}}</span></ion-col>
+				<ion-col><span>{{'RA Color'}}</span></ion-col>
+				<ion-col><span>{{'WD ID'}}</span></ion-col>
+				<ion-col><span>{{'Beat'}}</span></ion-col>
+				<ion-col><span>{{'Merchandiser'}}</span></ion-col>
+				<ion-col><span>{{'Visited'}}</span></ion-col>
+			</ion-row>
+			<ion-row *ngFor="let visit of results" [routerLink]="['/rainbow/visits', visit.visit_id]"
+				class="white-bg ion-align-items-center">
+				<!-- <ion-col size="auto">
+          <div>
+            <ion-checkbox [(ngModel)]="store.selected"></ion-checkbox>
+          </div>
+        </ion-col> -->
+				<ion-col size="2">
+					<div>
+						<div>{{visit.store_name}}</div>
+						<div class="small-font mild" style="margin-top:4px;">Dhanush ID: {{visit.dhanush_id ? visit.dhanush_id: ''}}</div>
+					</div>
+				</ion-col>
+				<!-- <ion-col>
+          <div>{{visit.branch}}</div>
+        </ion-col> -->
+				<ion-col>
+					<div>{{visit.market_name}}</div>
+				</ion-col>
+				<ion-col>
+					<div>{{visit.ra_type}}</div>
+				</ion-col>
+				<ion-col>
+					<div>{{visit.ra_color}}</div>
+				</ion-col>
+				<ion-col>
+					<div>{{visit.wd_id}}</div>
+				</ion-col>
+				<ion-col>
+					<div>
+						<div> {{visit.beat_name}} </div>
+					</div>
+				</ion-col>
+				<ion-col>
+					<div>{{visit.marchendiser_name}}</div>
+				</ion-col>
+				<ion-col>
+					<div> {{visit.visited_on | date}} </div>
+				</ion-col>
+				<!-- <ion-col (click)="showStoreDetails('VIEW', store)">
+          <div>
+            <ion-chip class="ion-no-margin" [color]="store.store_status ? 'success' : 'danger' ">
+              <ng-container *ngIf="store.store_status">Active</ng-container>
+              <ng-container *ngIf="!store.store_status">Inactive</ng-container>
+            </ion-chip>
+          </div>
+        </ion-col> -->
+			</ion-row>
+		</ion-grid>
+	</div>
+</ng-template>

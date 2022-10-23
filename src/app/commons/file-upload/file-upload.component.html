@@ -1,0 +1,10 @@
+<div>
+  <div class="file-drop-area">
+    <!-- <span class="fake-btn">Choose file</span> -->
+    <ion-button size="small" fill="outline" style="vertical-align: middle;" class="ion-margin-end">Choose file
+    </ion-button>
+    <span class="file-msg" style="vertical-align: middle;">{{file ? file.name : 'or drag and drop (' + allowedType + ')
+      file here' }}</span>
+    <input class="file-input" type="file" [accept]="allowedType">
+  </div>
+</div>

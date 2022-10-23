@@ -1,0 +1,96 @@
+<ion-app>
+	<ion-split-pane contentId="main-content" [ngClass]="{'expanded':isSidebarExpanded}">
+		<ion-menu contentId="main-content" type="overlay">
+			<ion-header class="ion-no-border header-border">
+				<ion-toolbar>
+					<div *ngIf="!isSidebarExpanded" class="ion-text-center">
+						<ion-button color="dark" fill="clear" (click)="toggleSidebar()">
+							<ion-icon name="menu"></ion-icon>
+						</ion-button>
+					</div>
+					<div *ngIf="isSidebarExpanded">
+						<ion-buttons slot="start">
+							<ion-button color="dark" fill="clear" (click)="toggleSidebar()">
+								<ion-icon name="menu"></ion-icon>
+							</ion-button>
+						</ion-buttons>
+					</div>
+				</ion-toolbar>
+			</ion-header>
+			<ion-content style="--background:#fff">
+				<ng-container *ngIf="projName==true" [ngSwitch]="isSidebarExpanded">
+					<ion-list *ngSwitchCase="true">
+						<ng-container *ngFor="let page of pages;let i = index">
+							<ion-menu-toggle auto-hide="false" *adjAuthCheck="page.permissions">
+								<ion-item [ngClass]="{'selected':orgService.myIndex?orgService.myIndex
+								==page.val:(selectedIndex == i) }" (click)="selectedIndex = i" button lines="none" [routerLink]="page.url"
+									routerDirection="root">
+									<ion-icon [name]="selectedIndex == i ? page.icon : page.icon + '-outline'"
+										slot="start"></ion-icon>
+									<ion-label>{{page.name}}
+									</ion-label>
+								</ion-item>
+							</ion-menu-toggle>
+						</ng-container>
+					</ion-list>
+					<ion-list *ngSwitchCase="false">
+						<ng-container *ngFor="let page of pages;let i = index">
+							<ion-menu-toggle auto-hide="false" *adjAuthCheck="page.permissions">
+								<ion-button [ngClass]="{'selected':orgService.myIndex?orgService.myIndex
+								==page.val:(selectedIndex == i) }" (click)="selectedIndex = i" class="menu-icon-button" adj-big-button
+									expand="full" size="default" button fill="clear" [routerLink]="page.url"
+									routerDirection="root" [matTooltip]="page.name" matTooltipPosition="right">
+									<ion-icon *ngIf="!(orgService.myIndex)"
+										[color]="selectedIndex == i  ? 'primary' : 'dark'"
+										[name]="selectedIndex == i ? page.icon : page.icon + '-outline'"
+										slot="icon-only"></ion-icon>
+
+
+									<ion-icon *ngIf="orgService.myIndex"
+										[color]="orgService.myIndex ==page.val  ? 'primary' : 'dark'"
+										[name]="orgService.myIndex ==page.val  ? page.icon : page.icon + '-outline'"
+										slot="icon-only"></ion-icon>
+								</ion-button>
+							</ion-menu-toggle>
+						</ng-container>
+					</ion-list>
+				</ng-container>
+				<ng-container *ngIf="projName==false" [ngSwitch]="isSidebarExpanded">
+					<ion-list *ngSwitchCase="true">
+						<ng-container *ngFor="let page of sunRisepages;let i = index">
+							<ion-menu-toggle auto-hide="false" *adjAuthCheck="page.permissions">
+								<ion-item [ngClass]="{'selected':selectedIndex == i}" (click)="selectedIndex = i" button
+									lines="none" [routerLink]="page.url" routerDirection="root">
+									<ion-icon [name]="selectedIndex == i ? page.icon : page.icon + '-outline'"
+										slot="start"></ion-icon>
+									<ion-label>{{page.name}}</ion-label>
+								</ion-item>
+							</ion-menu-toggle>
+						</ng-container>
+					</ion-list>
+					<ion-list *ngSwitchCase="false">
+						<ng-container *ngFor="let page of sunRisepages;let i = index">
+							<ion-menu-toggle auto-hide="false" *adjAuthCheck="page.permissions">
+								<ion-button [ngClass]="{'selected':selectedIndex == i}" (click)="selectedIndex = i"
+									class="menu-icon-button" adj-big-button expand="full" size="default" button
+									fill="clear" [routerLink]="page.url" routerDirection="root" [matTooltip]="page.name"
+									matTooltipPosition="right">
+									<ion-icon [color]="selectedIndex == i ? 'primary' : 'dark'"
+										[name]="selectedIndex == i ? page.icon : page.icon + '-outline'"
+										slot="icon-only"></ion-icon>
+								</ion-button>
+							</ion-menu-toggle>
+						</ng-container>
+					</ion-list>
+				</ng-container>
+			</ion-content>
+		</ion-menu>
+		<ion-router-outlet id="main-content"></ion-router-outlet>
+	</ion-split-pane>
+</ion-app>
+<ng-template #geoPlaceTemplate let-place="option">
+	<div>
+		<div>place.name</div>
+		<div class="small-font mild" style="padding-top:4px"> place.type?.name </div>
+	</div>
+</ng-template>

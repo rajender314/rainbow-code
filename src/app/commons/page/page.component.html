@@ -1,0 +1,24 @@
+<div class="ion-padding-horizontal">
+  <adj-app-export ></adj-app-export>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-justify-content-center ion-align-items-center" *ngIf="pageConfig">
+      <ion-col>
+        <div class="ion-padding">
+          <h1 class="bold" *ngIf="pageConfig.title">{{pageConfig.title}}</h1>
+          <p class="light-mild" *ngIf="pageConfig.subtitle">{{pageConfig.subtitle}}</p>
+        </div>
+      </ion-col>
+      <ion-col size="auto">
+        <div class="ion-padding ion-text-right">
+          <ng-content select="[buttons]"></ng-content>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-lg="12">
+        <ng-content></ng-content>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</div>

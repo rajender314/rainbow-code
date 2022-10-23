@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Store Filter</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="reset();">Reset</ion-button>
+      <ion-button (click)="submit();">Apply</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="white-bg ion-padding">
+    <ion-grid>
+      
+      <ion-row>
+        <ion-col>
+          <div class="multi-select-form-field ion-margin-vertical">
+            <div class="form-field-label">Beat Type</div>
+            <adj-multi-select [data]="(this.beatType$ | async)" mapFn="v=>v" [current]="filter.beatType"
+              (selected)="filter.beatType = $event;handleBeatTypeSelection();"></adj-multi-select>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="multi-select-form-field ion-margin-vertical">
+            <div class="form-field-label">Branch</div>
+            <adj-multi-select [viewTemplate]="beatTemplate" name="beatName" [data]="(this.beat$ | async)" mapFn="v=>v"
+              [current]="filter.beatName" (selected)="filter.beatName = $event;"></adj-multi-select>
+          </div>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col>
+          <div class="multi-select-form-field ion-margin-vertical">
+            <div class="form-field-label">Store Type</div>
+            <adj-multi-select mapFn="v=>v" [current]="filter.storeType"
+              (selected)="filter.storeType = $event;"></adj-multi-select>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>
+
+
+<ng-template #beatTemplate let-beat="option">
+  <div>
+    <div>{{beat.name}}</div>
+    <div class="small-font mild" style="padding-top:4px">{{beat.type}}</div>
+  </div>
+</ng-template>
+
+<ng-template #storeTemplate let-store="option">
+  <div>
+    <div>{{store.name}}</div>
+    <div class="small-font mild" style="padding-top:4px">{{store.territory_name }} {{"|"}}
+      {{store.outlet_type_name}}</div>
+  </div>
+</ng-template>

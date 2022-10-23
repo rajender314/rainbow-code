@@ -1,0 +1,102 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="end">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{report.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <adj-app-export></adj-app-export>
+  <div class="ion-padding">
+    <div class="ion-padding-horizontal">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-right">
+              <ng-container *ngIf="showDownloadReport">
+                <ion-button *adjAuthCheck="downloadPermissions" fill="outline" size="small"
+                  (click)="downloadReport($event, report)">
+                  <ion-icon name="download-outline" slot="start"></ion-icon>
+                  Download
+                </ion-button>
+              </ng-container>
+              <ion-button *ngIf="filter" [fill]="filter && filter.isNotEmpty()? 'solid': 'outline'" size="small"
+                (click)="showFilter($event)">
+                <ion-icon name="funnel-outline" slot="start">
+                </ion-icon>
+                filter
+              </ion-button>
+              <ion-button size="small" fill="outline" (click)="showDateOptions($event);">
+                <ion-icon name="calendar-outline" slot="start"></ion-icon>
+                {{dateFunction.label}}
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <!-- <upsell-body>
+      <adjoint-paginated-list [config]="paginatedListConfig" [lgTemplate]="reportTemplate" [mapFn]="mapReportInstance"
+        (onContent)="handleResponse($event)">
+      </adjoint-paginated-list>
+    </upsell-body> -->
+  </div>
+</ion-content>
+
+<ng-template #reportTemplate let-results="results">
+  <div class="ion-padding-horizontal">
+    <div class="ion-padding-bottom mild small-font" *ngIf="totalRecords">
+      {{'Total Records' | uppercase}} - {{totalRecords}}
+    </div>
+    <ion-grid *ngIf="results" class="small ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+      <ion-row class="grid-header sticky-header">
+        <ion-col><span>{{'Name' | uppercase}}</span></ion-col>
+        <ng-container *ngIf="report.extra_columns && report.extra_columns.length > 0">
+          <ion-col *ngFor="let extra_col of report.extra_columns">
+            {{extra_col.display_name}}
+          </ion-col>
+        </ng-container>
+        <ion-col><span>{{'Step' | uppercase}}</span></ion-col>
+        <ion-col><span>{{'Updated at' | uppercase}}</span></ion-col>
+        <ion-col><span>{{'Status' | uppercase}}</span></ion-col>
+        <ion-col *ngIf="report.download_options.instance" size="auto" style="padding:0px">
+          <div style="opacity: 0;max-height: 10px;">
+            <ion-button size="small" color="dark" fill="clear">
+              <ion-icon slot="start" name="download-outline"></ion-icon> download
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let instance of results" class="white-bg ion-align-items-center"
+        (click)="showProcessHistory($event, instance)">
+        <ion-col>
+          <div>{{instance.process.name}}</div>
+        </ion-col>
+        <ng-container *ngIf="report.extra_columns && report.extra_columns.length > 0">
+          <ion-col *ngFor="let extra_col of report.extra_columns">
+            <div>{{instance[extra_col.value_lookup]}}</div>
+          </ion-col>
+        </ng-container>
+        <ion-col>
+          <div>{{instance.step.name}}</div>
+        </ion-col>
+        <ion-col>
+          <div>{{instance.updated_at | date}}</div>
+        </ion-col>
+        <ion-col>
+          <div>{{instance.displayStatus}}</div>
+        </ion-col>
+        <ion-col *ngIf="report.download_options.instance" size="auto">
+          <div>
+            <ion-button size="small" (click)="download($event, instance, report)" color="dark" fill="clear">
+              <ion-icon slot="start" name="download-outline"></ion-icon> download
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ng-template>

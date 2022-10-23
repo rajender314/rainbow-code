@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-title>
+    </ion-title>
+    <ion-buttons slot="end">
+      <adj-user-profile></adj-user-profile>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content> 
+  <adj-page [config]="config">
+    <div class="ion-padding-horizontal">
+      <ion-segment class="sticky-header" color="primary" scrollable="true" (ionChange)="handleSegmentChange($event)"
+        [value]="defaultSegment">
+        <ion-segment-button value="visit-compliance">
+          <ion-label>Visit Compliance</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="outlet-health-score">
+          <ion-label>Outlet Health Score</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="escalation-metrics">
+          <ion-label>Escalation Metrics</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="data-view">
+          <ion-label>Data View</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="reports">
+          <ion-label>Reports</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div class="ion-padding-vertical">
+      <ng-container [ngSwitch]="activeSegment">
+        <ng-container *ngSwitchCase="'visit-compliance'">
+          <div>Visit Compliance</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'outlet-health-score'">
+          <div>Outlet Health Score</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'escalation-metrics'">
+          <div>Escalation Metrics</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'data-view'">
+        <adj-data-view></adj-data-view>
+        </ng-container>
+        <ng-container *ngSwitchCase="'reports'">
+          <div>Reports</div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </adj-page>
+</ion-content>

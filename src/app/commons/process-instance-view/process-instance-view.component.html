@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="end">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <h1 *ngIf="instance" class="bold light-mild">Process&nbsp;<span
+          class="light mild-light small-font">|&nbsp;{{instance.process.name}}</span>
+      </h1>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="white-bg">
+  <div class="ion-padding">
+    <div *ngIf="instance" class="secondary-info ion-margin" style="border:1px solid rgba(0,0,0,0.12)">
+      <ion-grid>
+        <ion-row>
+          <ng-container *ngFor="let key of keys(instance.data)">
+            <ion-col size-lg="4">
+              <p class="light-mild" style="margin: 0px;"><span class="mild">{{key}}:</span>&nbsp;{{instance.data[key]}}
+              </p>
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <!-- <upsell-body>
+      <div *ngIf="tasks">
+        <div class="ion-padding-bottom">
+          <div class="border-box ion-margin-top ion-padding mat-elevation-z2" *ngFor="let task of tasks">
+            <h5>{{task.task_name}} <ion-chip color="success">Completed</ion-chip>
+            </h5>
+            <ion-grid>
+              <ion-row>
+                <ng-container *ngFor="let key of keys(task.data)">
+                  <ion-col size-lg="4">
+                    <p class="light-mild" style="margin: 0px;"><span
+                        class="mild">{{key}}:</span>&nbsp;{{task.data[key]}}</p>
+                  </ion-col>
+                </ng-container>
+              </ion-row>
+            </ion-grid>
+            <p class="mild small-font">Submitted at {{task.updated_at | date:'medium'}} <span
+                *ngIf="task.submitted_by">by
+                {{task.submitted_by.name}}</span></p>
+          </div>
+        </div>
+      </div>
+
+    </upsell-body> -->
+  </div>
+
+</ion-content>

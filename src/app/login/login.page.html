@@ -1,0 +1,93 @@
+<ion-content>
+	<ion-grid class="ion-no-padding full-height-vh map-background">
+		<ion-row class="full-height ion-justify-items-center">
+			<ion-col size="12" size-lg="4" push-lg="8" class="mat-elevation-z2 ion-align-items-center white-bg">
+				<div class="ion-padding-vertical ion-margin-vertical">
+					<div class="ion-padding ion-margin">
+						<h1 class="bold mild extra-large-font">Welcome again,</h1>
+						<p class="extra-mild thin">Please login to continue</p>
+					</div>
+					<!-- <ion-button [ngClass]="{'activ-cls':activeButton}" class="mar-br" (click)="LoginPin($event)">
+						Login with PIN
+					</ion-button>
+					<ion-button [ngClass]="{'activ-cls':!activeButton}" (click)="LoginOtp($event)"> Login with OTP
+					</ion-button> -->
+					<rainbow-body>
+
+						<mat-tab-group class="mar-br" (selectedTabChange)="LoginOtp($event)" [selectedIndex]=0>
+							<mat-tab label="LOGIN with OTP">
+								<div *ngIf="loginOtp">
+
+									<form [formGroup]="loginNumForm" (ngSubmit)="submitLoginNum(loginNumForm)">
+										<div class="mar-br mar-tp">
+											<mat-form-field appearance="outline">
+												<mat-label>Mobile Number</mat-label>
+												<input type="text" formControlName="mobile_num" maxlength="10"
+													minlength="10" pattern="^[6-9][0-9]{9}$" matInput>
+											</mat-form-field>
+											<div *ngIf="formSubmitNum && f.mobile_num.touched && f.mobile_num.invalid">
+												<ion-text class="small-font" *ngIf="f.mobile_num.errors.pattern"
+													color="danger">Please, Enter Valid 10 digit Mobile Number.
+												</ion-text>
+											</div>
+										</div>
+										<div class="send-otp ">
+											<ion-button class="ion-padding ion-margin" type="submit" color="danger">
+												Send
+												Otp </ion-button>
+										</div>
+									</form>
+								</div>
+								<div *ngIf="otpShow ">
+									<form [formGroup]="loginOtpForm" (ngSubmit)="submitLoginOtp()">
+										<div class="mar-br mar-tp">
+											<mat-form-field appearance="outline">
+												<mat-label>OTP</mat-label>
+												<input type="text" formControlName="otp" max="6" maxlength="6" matInput>
+											</mat-form-field>
+										</div>
+										<div class="send-otp-btn">
+											<ion-button class="" type="submit" color="primary" expand="block"> Login
+											</ion-button>
+										</div>
+									</form>
+								</div>
+							</mat-tab>
+
+							<mat-tab label="LOGIN with PIN">
+								<div *ngIf="error" class="ion-padding-horizontal ion-margin-horizontal">
+									<ion-text class="small-font" color="danger">{{error}}</ion-text>
+								</div>
+								<form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+									<div border-box class="ion-padding ion-margin">
+										<div>
+											<mat-form-field appearance="outline">
+												<mat-label>Username</mat-label>
+												<input type="text" formControlName="username" matInput>
+											</mat-form-field>
+										</div>
+										<div>
+											<mat-form-field appearance="outline">
+												<mat-label>Password</mat-label>
+												<input type="password" formControlName="password" matInput>
+											</mat-form-field>
+										</div>
+									</div>
+									<div>
+										<ion-button class="ion-padding ion-margin" type="submit" color="primary"
+											expand="block"> Login </ion-button>
+									</div>
+								</form>
+							</mat-tab>
+
+						</mat-tab-group>
+
+					</rainbow-body>
+
+
+				</div>
+			</ion-col>
+			<ion-col size="12" size-lg="8" pull-lg="4" class="gradient-background"> </ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

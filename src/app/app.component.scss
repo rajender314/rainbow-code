@@ -1,0 +1,50 @@
+
+:host{
+    ion-split-pane{
+      --side-max-width  :70px;
+      --side-min-width  : 70px;
+      --border	: 0px solid #000;
+        
+  
+      &.expanded{
+        --side-max-width  :220px;
+        --side-min-width  : 220px;
+      }
+    }
+
+    ion-content{
+      border-right: 1px solid rgba(0,0,0,0.12);
+    }
+    
+  }
+  
+  
+  ion-menu.md ion-item.selected, ion-button.selected {
+    
+    background: var(--ion-color-light);
+    --background: var(--ion-color-light);
+     ion-icon{
+        color :var(--ion-color-primary);
+        opacity: 1;
+        font-weight: 600;
+      }
+  
+      ion-label{
+        font-weight: 500;
+        color :var(--ion-color-primary);
+      }
+  }
+  
+  .animation{
+    transition: all 1s ease-in-out;
+  }
+  
+  .split-pane-side{
+    transition: all 0.15s;
+  }
+
+  .menu-icon-button{
+    margin: 12px auto;
+    color : #777 !important ;
+  }
+ 

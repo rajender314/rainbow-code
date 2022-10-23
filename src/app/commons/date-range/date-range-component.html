@@ -1,0 +1,40 @@
+<ion-content>
+  <ion-grid class="ion-no-padding" style="height: 100%;">
+    <ion-row style="height: 100%;">
+      <ion-col style="height: 100%;" class="app-item-background">
+        <ion-list>
+          <ion-item button="true" [ngClass]="{'selected':currentFunction == dateOption.value.dateFunction}"
+            *ngFor="let dateOption of dateOptions" (click)="selectDateFunction(dateOption);">
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <ion-label>
+              <h3>{{dateOption.label }}</h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col class="adj-border-left" *ngIf="showDateRange" size-lg="8">
+        <div [formGroup]="dateRangeForm" class="ion-padding">
+          <h5 class="ion-no-margin" opaque-level-2>Date Range</h5>
+          <div class="ion-padding-vertical ion-margin-vertical">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [rangePicker]="picker">
+                <input formControlName="startDate" matStartDate placeholder="Start date">
+                <input formControlName="endDate" matEndDate placeholder="End date">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Select Date</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,17 @@
+<div class="switch-app">
+	<div buttons>
+		<ion-button fill="solid" shape="round" (click)="projectOptions($event)"> {{statusNmae?statusNmae.label:status.label}} 
+			<ion-icon name="caret-down-outline" ></ion-icon>
+		</ion-button>
+	</div>
+	<div class="all-state">
+		<ng-container *ngIf="currentOrg"> <span *ngFor="let node of currentOrg; index as i;" class="small-font clickable" (click)="showOptions($event, node)">
+        <ng-container *ngIf="node.parent_id">
+          <ng-container *ngIf="i > 1">
+            &nbsp;
+            <span class="extra-mild">/</span> &nbsp; </ng-container> {{node.name | uppercase}}<span class="light mild extra-small-font">&nbsp;
+            </span> </ng-container>
+		</span>
+		</ng-container>
+	</div>
+</div>

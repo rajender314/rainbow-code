@@ -1,0 +1,35 @@
+<div>
+    <div class="ion-margin-bottom">
+      <ion-grid class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+        <ion-row class="grid-header sticky-header" [ngClass]="{'accodian-bgColor':showPreImages}" (click)="showPreImgesSection()" style="cursor: pointer;">
+          <ion-col style="font-weight: bold"><span class="acordian-heading" >{{visitObject.title}}</span> </ion-col>
+          <div>
+            <ng-container *ngTemplateOutlet="showPreImages ? upArrow: downArrow"></ng-container>
+          </div>
+        </ion-row>
+        <div class="img-section" *ngIf="showPreImages">
+          <div class="img-spinner-cls" *ngIf="!isImgLoaded && !noPreDataMsg">
+            <ion-spinner name="dots"></ion-spinner>
+          </div>
+          <p *ngIf="noPreDataMsg">No Images Found</p>
+          <ng-container *ngIf="isImgLoaded && !noPreDataMsg">
+            <div style="width: calc(100%/4 - 20px); margin: 0 10px 20px; cursor: pointer;" *ngFor="let element of preImgList; let i = index;">
+              <div>
+                <p class="img-label" [matTooltip]="element.caption" matTooltipPosition="below">{{element.caption}}</p>
+              </div> <img *ngIf="isImgLoaded" [src]="element.src" class="img-class" (click)="openPostImgModel(preImgList, i)" />
+              <div class="img-spinner-cls" *ngIf="!isImgLoaded">
+                <ion-spinner name="dots"></ion-spinner>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ion-grid>
+    </div>
+  </div>
+
+  <ng-template #upArrow>
+      <ion-icon name="chevron-up-outline" slot="icon-only"></ion-icon>
+    </ng-template>
+    <ng-template #downArrow>
+      <ion-icon name="chevron-down-outline" slot="icon-only"></ion-icon>
+    </ng-template>

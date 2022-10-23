@@ -1,0 +1,36 @@
+<div>
+
+  <ng-container *ngIf="loading | async">
+    <div class="ion-padding ion-text-center">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="error">
+    <ng-container *ngIf="errorTemplate else errorTemplateBlock">
+      <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="emptyResponse">
+    <ng-container *ngIf="emptyResponseTemplate else empty">
+      <ng-container *ngTemplateOutlet="emptyResponseTemplate"></ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="shouldShowBody">
+    <ng-content></ng-content>
+  </ng-container>
+</div>
+
+<ng-template #empty>
+  <div class="ion-padding ion-text-center">
+    looks like response is empty
+  </div>
+</ng-template>
+
+<ng-template #errorTemplateBlock>
+  <div class="ion-padding ion-text-center">
+    looks like there is an error, please try later.
+  </div>
+</ng-template>

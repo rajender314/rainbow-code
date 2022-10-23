@@ -1,0 +1,20 @@
+ion-item.selected {
+    h3{
+        color : var(--ion-color-secondary); 
+        font-weight: 600;
+    }
+ }
+
+ .visible-on-hover:not(.selected){
+    display: none;
+ }
+
+ ion-item:hover{
+    h3{
+        color : var(--ion-color-secondary); 
+    }
+    .visible-on-hover{
+        display: block;
+        color:  var(--ion-color-secondary); 
+    }
+ }

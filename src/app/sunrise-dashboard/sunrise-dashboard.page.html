@@ -1,0 +1,47 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-title>
+      <adj-organisation></adj-organisation>
+    </ion-title>
+    <ion-buttons slot="end">
+      <adj-user-profile></adj-user-profile>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content> 
+  <adj-page>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div border-box class="white-bg mat-elevation-z0 ion-padding ion-margin">
+            <div class="ion-padding kpi-background">
+              <h1 class="bold large-font light-mild">Hi <span *ngIf="user">{{user.user_name}}</span>, Welcome to the Sunrise
+                Web Portal
+              </h1>
+              <p class="mild">Let’s catch up with the latest Updates</p>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <div>
+            <adj-sunrise-dashboard-summary></adj-sunrise-dashboard-summary>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-lg="7">
+          <!-- <div>Left</div>
+          <adj-sales-history [date-function]="dateFunction" [date-selection]="false"></adj-sales-history> -->
+        </ion-col>
+        <ion-col size-lg="5">
+          <div>
+            <!-- <div>Right</div>
+            <adj-kpi [date-function]="dateFunction" [date-selection]="false"></adj-kpi> -->
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </adj-page>
+</ion-content>

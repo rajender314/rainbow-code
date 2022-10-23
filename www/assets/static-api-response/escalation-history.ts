@@ -1,0 +1,1 @@
+export const escalation_history = [{"sku_count":64000, "date":"2021-01-01"},{"sku_count":65000, "date":"2021-02-01"},{"sku_count":69000, "date":"2021-03-01"},{"sku_count":76000, "date":"2021-04-01"},{"sku_count":80000, "date":"2021-05-01"}];

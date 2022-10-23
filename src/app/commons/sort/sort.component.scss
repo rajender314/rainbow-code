@@ -1,0 +1,15 @@
+.selected{
+    ion-icon{
+        color : var(--ion-color-primary);
+    }
+
+    ion-button{
+        opacity: 1 !important;
+    }
+
+    ion-label{
+        color : var(--ion-color-primary);
+        font-weight: 500;
+
+    }
+}

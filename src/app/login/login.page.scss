@@ -1,0 +1,94 @@
+:host{
+    mat-form-field{
+        width: 100%;
+    }
+
+    .form-error{
+        margin-top: -16px;
+        margin-bottom: 32px;
+    }
+
+    ion-slide{
+        font-size: 16px;
+        text-align: left;    
+    }
+
+    form{
+        width: 100%;
+    }
+
+    .full-height-vh{
+        height: 100vh;
+    }
+
+    .full-height{
+        height: 100%;
+    }
+    
+    .map-background{
+        background:url('/assets/img/map_dark_theme.png');
+        background-size: contain;
+    }
+
+    .white-bg {
+        background: #fff;
+    }
+
+    .gradient-background{
+        background: linear-gradient(45deg, #000, var(--ion-color-primary));
+        opacity: 0.80;
+    }
+}
+.orcls{
+    display:flex;
+    justify-content: center;
+}
+.mar-br{
+    margin: 0px 10px
+}
+.send-otp{
+    display: flex;
+    justify-content: center;
+}
+.send-otp-btn{
+    margin: 0px 10px  
+}
+.or-line {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+  }
+  .line {
+    flex: 1;
+  }
+  .text {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .sub-line{
+      border-top: 1px solid black;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+.activ-cls{
+    opacity: 0.5;
+}
+::ng-deep .mat-tab-label-active {
+    background-color :#7e57c2;
+    font-size : 15px
+  }
+  .mar-tp{
+      margin-top: 16px;
+  }
+  ::ng-deep.mat-tab-link,  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+    min-width: 280px!important;
+}

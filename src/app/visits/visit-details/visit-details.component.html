@@ -1,0 +1,158 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="end">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div style="min-height: 100%;" class="ion-padding white-bg" *ngIf="0">
+    <form [formGroup]="formGroup">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Visit ID<sup>*</sup>
+              </mat-label>
+              <input matInput formControlName="outlet_id" [readonly]="true" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Store Name<sup>*</sup></mat-label>
+              <input matInput formControlName="name" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>WD ID<sup>*</sup>
+              </mat-label>
+              <input matInput formControlName="wd_id" [readonly]="true" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Market Name<sup>*</sup></mat-label>
+              <input matInput formControlName="market_name" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Merchandiser Name<sup>*</sup>
+              </mat-label>
+              <input matInput formControlName="merchandiser_name" [readonly]="true" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Visited On<sup>*</sup></mat-label>
+              <input matInput formControlName="created_at" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Beat Name<sup>*</sup></mat-label>
+              <input matInput formControlName="beat_name" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+        
+        
+        
+
+        <ion-row>
+          <ion-col *ngIf="mode == 'VIEW'" class="ion-margin-bottom">
+            <div class="mild ion-margin-bottom">Outlet Health Score</div>
+            <ion-grid
+              class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+              <ion-row class="grid-header sticky-header">
+                <ion-col><span>{{'Element' | uppercase}}</span> </ion-col>
+                <ion-col><span>{{'Value' | uppercase}}</span></ion-col>
+              </ion-row>
+              <ion-row *ngFor="let element of visitResponse[0].outletHealthScore | keyvalue" class="white-bg ion-align-items-center">
+                <ion-col>
+                  <div>
+                    <div>{{element.key}}</div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div>
+                    <div>{{element.value}}</div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+
+
+        <!-- <ion-grid>
+          <div class="mild ion-margin-bottom">Pre Images</div>
+          <ion-row>
+            <ion-col size="4" *ngFor="let preImage of visitPreImages.results">
+              <div>
+                <div class="ion-text-center">{{preImage.image_name}}</div>
+                <ion-img [src]="preImage.image_src"></ion-img>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+       
+
+
+        <ion-row *ngIf="mode == 'EDIT'">
+          <ion-col>
+            <div class="ion-padding-vertical ion-margin-vertical">
+              <ion-button size="block" >Submit</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+
+  <div style="min-height: 100%;" class="ion-padding white-bg justify-center">
+
+    <div>
+    <!-- <p>{{photoLabel}}</p> -->
+     <!-- <img class="imgurl-align" src="{{imageUrl}}" alt="img"> -->
+     <!-- <div style="overflow: scroll; height: 200px;display: flex; justify-content: center">
+        <div style="width: 600px" *ngFor="let element of imagesList[0].preimages | keyvalue">
+          <div >{{element.key}}</div>
+          <img   [src]="element.value" width="160px" height="150px" style="padding: 12px;cursor: pointer;" 
+           />
+          <div style="width: 160px; height: 150px;" *ngIf="!isImgLoaded">
+
+          </div>
+        </div>
+      </div> -->
+
+      
+     
+
+      
+      
+      <!-- <div style="text-align: center;">
+          <ion-button >
+              <ion-icon name="chevron-back-outline"  slot="icon-only"></ion-icon>
+              </ion-button>
+           <ion-button>
+           <ion-icon name="chevron-forward-outline" slot="icon-only" ></ion-icon>
+           </ion-button>
+      </div> -->
+
+
+</div>
+  </div>
+</ion-content>

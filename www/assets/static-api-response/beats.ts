@@ -1,0 +1,5 @@
+export const beats = {"page":{"current_page":1,"next_page":2,"prev_page":null,"total_pages":2,"page_size":40,"count":77},"links":{"next":"http://api.upsell.adjoint.in/portal/api/stores/list/?org_node=1&page=2&page_size=40&status=True","previous":null},"results":[{"outlet_id":"337835","outlet_type":"Pan Shop","wd_id":"BL5038","market_name":"Bangalore","merchandiser_name":"Arun","branch":"Bangalore","beat_name":"Monday","name":"Nandana Pan","contact_no":"7417710744","store_status":true,"created_at":"2021-03-23T13:30:04Z","updated_at":"2021-03-26T05:29:24.341809Z","created_by":1,"updated_by":1},
+
+{"outlet_id":"823044","outlet_type":"Cigerette Shop","wd_id":"BL5669","market_name":"Diamond Harbour (UA)","merchandiser_name":"Punith","branch":"Bangalore","beat_name":"Wednesday","name":"Samudra Tea Stall","contact_no":"9845875948","store_status":true,"created_at":"2021-03-26T13:30:04Z","updated_at":"2021-03-29T05:29:24.341809Z","created_by":1,"updated_by":1}
+
+]};

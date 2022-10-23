@@ -1,0 +1,156 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button (click)="close();">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div style="min-height: 100%;" class="ion-padding white-bg">
+    <form [formGroup]="formGroup">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Dhanush ID<sup>*</sup>
+              </mat-label>
+              <input matInput formControlName="dhanush_id" [readonly]="true" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Store Name<sup>*</sup></mat-label>
+              <input matInput formControlName="name" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Branch<sup>*</sup></mat-label>
+              <input matInput formControlName="branch" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Market Name<sup>*</sup></mat-label>
+              <input matInput formControlName="market_name" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Owner Name<sup>*</sup></mat-label>
+              <input matInput formControlName="owner_name" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Owner Mobile Number<sup>*</sup></mat-label>
+              <input matInput formControlName="contact_no" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>WD ID</mat-label>
+              <input matInput formControlName="wd_id" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Beat Name</mat-label>
+              <input matInput formControlName="beat_name" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+          <ion-col>
+            <mat-form-field appearance="outline">
+              <mat-label>Last Visited</mat-label>
+              <input matInput formControlName="created_at" [readonly]="readOnly" />
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col *ngIf="mode == 'VIEW'" class="ion-margin-bottom">
+            <div class="mild ion-margin-bottom">Element Details</div>
+            <ion-grid class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+              <ion-row class="grid-header sticky-header">
+                <ion-col><span>{{'Name' | uppercase}}</span> </ion-col>
+                <ion-col><span>{{'Presence' | uppercase}}</span></ion-col>
+                <!-- <ion-col><span>{{'Images' | uppercase}}</span></ion-col> -->
+              </ion-row>
+              <ion-row *ngFor="let element of elements" class="white-bg ion-align-items-center">
+                <ion-col>
+                  <div>
+                    <div>{{element.element_name}}</div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div>
+                    <div>{{element.presence}}</div>
+                  </div>
+                </ion-col>
+                <!-- <ion-col>
+                  <div>
+                    <div (click)="showElementImages('VIEW',element);" class="underline">Image</div>
+                  </div>
+                </ion-col> -->
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col class="ion-margin-bottom">
+            <div class="mild ion-margin-bottom">Visits</div>
+            <ion-grid class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+              <ion-row class="grid-header sticky-header">
+                <ion-col><span>{{'Visit ID' | uppercase}}</span> </ion-col>
+                <ion-col><span>{{'Name' | uppercase}}</span></ion-col>
+                <ion-col><span>{{'Visited On' | uppercase}}</span> </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let visit of visits" (click)="myRoute(visit)"
+                [routerLink]="['/rainbow/visits', visit.visit_id]" class="white-bg ion-align-items-center">
+                <ion-col>
+                  <div>
+                    <div>{{visit.visit_id}}</div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div>
+                    <div>{{visit.visited_user_name}}</div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div>
+                    <div>{{visit.visit_date | date }}</div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row *ngIf="mode == 'EDIT'">
+          <ion-col>
+            <div class="ion-padding-vertical ion-margin-vertical">
+              <ion-button size="block">Submit</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>
+
+<ng-template #beatItem let-beat="option">
+  <div>
+    <div>{{beat.name}}</div>
+    <div class="small-font mild" style="padding-top:4px">{{beat.type}}</div>
+  </div>
+</ng-template>

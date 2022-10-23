@@ -1,0 +1,128 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-title>
+      <adj-organisation></adj-organisation>
+    </ion-title>
+    <ion-buttons slot="end">
+      <adj-user-profile></adj-user-profile>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border header-border">
+    <ion-toolbar class="ion-no-border">
+      <ion-buttons slot="start">
+        <ion-button (click)="close();">
+            <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Store Summary</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <div>
+        <ion-list class="toggle-list">
+            <ion-item class="branch_toggle">
+              <ion-label  class="toggle-lable"> Branch</ion-label>
+              <ion-toggle (ionChange)="ionChangeMarket($event)"  value="showByMarket"></ion-toggle>
+              <ion-label> Market</ion-label>
+
+            </ion-item>
+          
+            <ion-item class="ratype_class">
+              <ion-label>RA Type</ion-label>
+              <ion-toggle (ionChange)="ionChangeRa($event)" value="showByRa" ></ion-toggle>
+              <ion-label  class="toggle-lable">RA Color</ion-label>
+
+            </ion-item>
+
+          </ion-list>
+        </div>
+    
+  
+  
+<div class="table-scroll">
+      <div *ngIf="results" >
+      <div class="ion-padding-horizontal">
+          <div class="ion-padding-bottom mild small-font" *ngIf="totalRecords">
+              {{'Total Records' | uppercase}} - {{totalRecords}}
+            </div>
+        <ion-grid  class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+          <ion-row class="grid-header sticky-header">
+          
+            <ion-col><span>{{'District'}}</span></ion-col>
+            <ion-col><span>{{'Branch'}}</span></ion-col>
+            <ion-col *ngIf="marketGrp == '1'"><span>{{'Market'}}</span></ion-col>
+            <ion-col><span>{{'Total PJP Outlets'}}</span></ion-col>
+            <ion-col><span>{{'Addition'}}</span></ion-col>
+            <ion-col><span>{{'Removal'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '0'"><span>{{'RA 1'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '0'"><span>{{'RA 2'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '0'"><span>{{'RA 3'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '0'"><span>{{'RA 4'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '1'"><span>{{'Amber Yellow'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '1'"><span>{{'Golden Yellow'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '1'"><span>{{'Maroon'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '1'"><span>{{'Red'}}</span></ion-col>
+            <ion-col *ngIf="raColor == '1'"><span>{{'Sky Blue'}}</span></ion-col>
+            
+          </ion-row>
+          <ng-container *ngFor="let visit of results" >
+
+              <ion-row   class="white-bg ion-align-items-center"
+              [ngClass]="{'totalSumRow':visit.regionSum, 'rowHighlight':visit.totalSum, 'sticky-totalsum-row':visit.totalSum}">
+            
+                  <ion-col>
+                    <div>
+                      <div>{{visit.region}}</div>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div>{{visit.branch}}</div>
+                  </ion-col>
+                  <ion-col  *ngIf="marketGrp == '1'">
+                    <div>{{visit.market_name}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div>{{visit.total_pjp_outlets}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div>{{visit.addition}}</div>
+                  </ion-col>
+                  <ion-col>
+                    <div>{{visit.removal}}</div>
+                  </ion-col>
+                  <ion-col *ngIf="raColor == '0'">
+                      <div>
+                        {{visit.ra_1}}
+                      </div>
+                  </ion-col>
+                  <ion-col *ngIf="raColor == '0'">
+                    <div>{{visit.ra_2}}</div>
+                  </ion-col>
+                  <ion-col *ngIf="raColor == '0'">
+                    <div>
+                      {{visit.ra_3}}
+                    </div>
+                  </ion-col>
+                  <ion-col *ngIf="raColor == '0'">
+                    <div>
+                      {{visit.ra_5}}
+                    </div>
+                  </ion-col>
+                  <ion-col *ngIf="raColor == '1'"><div>{{visit.amber_yellow}}</div></ion-col>
+                  <ion-col *ngIf="raColor == '1'"><div>{{visit.golden_yellow}}</div></ion-col>
+                  <ion-col *ngIf="raColor == '1'"><div>{{visit.maroon}}</div></ion-col>
+                  <ion-col *ngIf="raColor == '1'"><div>{{visit.red}}</div></ion-col>
+                  <ion-col *ngIf="raColor == '1'"><div>{{visit.sky_blue}}</div></ion-col>
+      
+             
+                </ion-row>
+          </ng-container>
+          
+        </ion-grid>
+      </div>
+  
+  
+    </div>
+  
+  </div>

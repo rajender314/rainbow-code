@@ -1,0 +1,90 @@
+<div class="relative-position" *ngIf="!disabled">
+
+  <div *ngIf="display == 'search'">
+    <ng-container *ngIf="chips">
+      <ion-chip class="small-font light" color="primary" *ngFor="let option of selectedValues">
+        <ion-label> {{option[labelPropName]}} </ion-label>
+        <ion-icon name="close" (click)="removeItem($event, option)"></ion-icon>
+      </ion-chip>
+    </ng-container>
+    <input type="text" [placeholder]="placeHolder" [formControl]="searchControl" (focus)="showResponse = true;"
+      (keydown.backspace)="handleRemove($event)">
+  </div>
+
+  <div *ngIf="display == 'select'">
+    <div *ngIf="display == 'select'" (click)="showResponse = true;">
+      <ion-grid class="ion-no-padding">
+        <ion-row clickable class="ion-align-items-center clickable">
+          <ion-col>
+            <ng-container *ngIf="selectedValues && selectedValues.length > 0">
+              <span *ngFor="let option of selectedValues; last as isLast">
+                {{option[labelPropName]}} <span *ngIf="!isLast">,</span> </span>
+            </ng-container>
+            <ng-container *ngIf="!selectedValues || selectedValues.length == 0">
+              <span class="small-font mild">Click to select</span>
+            </ng-container>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-button fill="clear" color="dark" class="mild">
+              <ion-icon slot="icon-only" name="chevron-down-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+    </div>
+  </div>
+  
+
+
+  <div *ngIf="showResponse" class="mat-elevation-z4 border-box white-bg response-container absolute-position">
+    <div class="close-panel-container white-bg" *ngIf="results && results.length > 0">
+      <ion-button size="small" (click)="closePanel();" fill="clear" color="dark">Close
+        <ion-icon name="close" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="white-bg ion-padding" *ngIf="(!results || results.length == 0)">
+      <div class="mild small-font">Keep typing to perform the search...</div>
+    </div>
+    <!-- <upsell-body class="white-bg">
+      <ion-grid>
+        <ion-row *ngFor="let option of results" style="padding:8px" class="ion-align-items-center">
+          <ng-container *ngIf="multiple">
+            <ion-col size="auto" style="padding-right:8px;padding-bottom: 0px;">
+              <ion-checkbox (ionChange)="itemChanged($event, option)" [(ngModel)]="option.isChecked">
+              </ion-checkbox>
+            </ion-col>
+            <ion-col (click)="option.isChecked = !option.isChecked" clickable>
+              <ng-container *ngTemplateOutlet="(viewTemplate)?viewTemplate : defaultTemplate;context:{option:option}">
+              </ng-container>
+            </ion-col>
+          </ng-container>
+
+          <ng-container *ngIf="!multiple">
+            <ion-col size="auto" style="padding-right:8px;padding-bottom: 0px;"
+              [ngClass]="{'selected-item':singleSelect && singleSelect[idPropName] == option[idPropName]}">
+              <ion-icon name="checkmark-sharp" class="extra-mild"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <div (click)="itemSelected($event, option)"
+                [ngClass]="{'selected-item':singleSelect && singleSelect[idPropName] == option[idPropName]}">
+                <ng-container *ngTemplateOutlet="(viewTemplate)?viewTemplate : defaultTemplate;context:{option:option}">
+                </ng-container>
+              </div>
+            </ion-col>
+          </ng-container>
+
+        </ion-row>
+      </ion-grid>
+    </upsell-body> -->
+  </div>
+</div>
+<div class="relative-position" *ngIf="disabled">
+  <div style="padding:8px" class="extra-mild small-font">{{disabledMessage}}</div>
+</div>
+
+
+<ng-template #defaultTemplate let-option="option">
+  <div class="light-mild">{{option[labelPropName]}}</div>
+</ng-template>

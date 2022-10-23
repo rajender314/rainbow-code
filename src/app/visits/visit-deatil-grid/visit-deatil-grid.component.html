@@ -1,0 +1,41 @@
+<div>
+    <div class="ion-margin-bottom">
+      <ion-grid class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+        <ion-row class="grid-header sticky-header" (click)="showOutlet();" style="cursor: pointer;" [ngClass]="{'accodian-bgColor':expandOutlet}">
+          <ion-col style="font-weight: bold"><span class="acordian-heading">{{pageData.title}}</span> </ion-col>
+          <div>
+            <ng-container *ngTemplateOutlet="expandOutlet ? upArrow: downArrow"></ng-container>
+          </div>
+        </ion-row>
+        <ng-container *ngIf="expandOutlet">
+          <ion-row class="grid-header sticky-header">
+            <ion-col *ngIf="expandOutlet"><span>{{'Element' | uppercase}}</span> </ion-col>
+            <ion-col *ngIf="expandOutlet"><span>{{'Value' | uppercase}}</span></ion-col>
+          </ion-row>
+          <ng-container *ngFor="let element of pageData.displayData | keyvalue">
+            <ion-row class="white-bg ion-align-items-center" *ngIf="element.value">
+              <ion-col>
+                <div>
+                  <div>{{element.key}}</div>
+                </div>
+              </ion-col>
+              <ion-col>
+                <div>
+                  <div>{{element.value == 1 ? 'Yes' : element.value == 0 ? 'No' : element.value }}</div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+        </ng-container>
+      </ion-grid>
+    </div>
+  </div>
+
+
+
+  <ng-template #upArrow>
+      <ion-icon name="chevron-up-outline" slot="icon-only"></ion-icon>
+    </ng-template>
+    <ng-template #downArrow>
+      <ion-icon name="chevron-down-outline" slot="icon-only"></ion-icon>
+    </ng-template>

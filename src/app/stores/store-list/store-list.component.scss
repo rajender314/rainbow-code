@@ -1,0 +1,11 @@
+.srch_clear {
+    float: left;
+
+}
+
+.search-bar input::placeholder{
+    font-size:14px !important;
+    }
+ .search-bar input::-webkit-input-placeholder {
+        font-size:14px !important;
+}

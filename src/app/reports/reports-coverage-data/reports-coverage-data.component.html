@@ -1,0 +1,115 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-title>
+      <adj-organisation></adj-organisation>
+    </ion-title>
+    <ion-buttons slot="end">
+      <adj-user-profile></adj-user-profile>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button (click)="close();">
+          <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>L1 Coverage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <div>
+      <ion-list class="toggle-list">
+          <ion-item class="ratype_class">
+            <ion-label  class="toggle-lable">Branch</ion-label>
+            <ion-toggle (ionChange)="ChangeMonth($event)" value="showByMonth"></ion-toggle>
+            <ion-label>Month</ion-label>
+
+          </ion-item>
+          <ion-item class="ratype_class">
+            <ion-label>Branch</ion-label>
+            <ion-toggle (ionChange)="ChangeMarket($event)" value="showByMarket" ></ion-toggle>
+            <ion-label  class="toggle-lable"> Market</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+  
+
+
+<div class="table-scroll">
+    <div *ngIf="results" >
+    <div class="ion-padding-horizontal">
+        <div class="ion-padding-bottom mild small-font" *ngIf="totalRecords">
+            {{'Total Records' | uppercase}} - {{totalRecords}}
+          </div>
+      <ion-grid  class="ion-no-padding adjoint-data-grid mat-elevation-z2 boder-box white-bg">
+        <ion-row class="grid-header sticky-header">
+        
+          <ion-col *ngIf="monthGroup == '0'"><span>{{'District'}}</span></ion-col>
+          <ion-col *ngIf="monthGroup == '0'"><span>{{'Branch'}}</span></ion-col>
+          <ion-col *ngIf="monthGroup == '1'"><span>{{'Visited Month'}}</span></ion-col>
+          <ion-col *ngIf="marketGroup == '1'"><span>{{'Market'}}</span></ion-col>
+          <ion-col><span>{{'Cleaned Outlets'}}</span></ion-col>
+          <ion-col><span>{{'% of Cleaned Outlets'}}</span></ion-col>
+          <ion-col><span>{{'Covered Outlets'}}</span></ion-col>
+          <ion-col><span>{{'Issue Outlets'}}</span></ion-col>
+          <ion-col><span>{{'% of Issue Outlets'}}</span></ion-col>
+          <ion-col><span>{{'Planned Outlets'}}</span></ion-col>
+         
+        </ion-row>
+        <ion-row *ngFor="let visit of results"  class="white-bg ion-align-items-center"
+        [ngClass]="{'totalSumRow':visit.regionSum, 'rowHighlight':visit.totalSum, 'sticky-totalsum-row':visit.totalSum}">
+          
+          <ion-col *ngIf="monthGroup == '0' ">
+            <div>
+              <div>{{visit.region}}</div>
+            </div>
+          </ion-col >
+          <ion-col *ngIf="monthGroup == '0' ">
+            <div>{{visit.branch}}</div>
+          </ion-col>
+
+          <ion-col *ngIf="monthGroup == '1'">
+            <div>
+              {{visit.visited_month }}
+            </div>
+            <div *ngIf="visit.totalSum">
+                PAN INDIA TOTAL : 
+              </div>
+          </ion-col>
+          <ion-col *ngIf="marketGroup == '1'">
+            <div>{{visit.market_name}}</div>
+          </ion-col>
+          <ion-col>
+            <div>{{visit.cleaned_outlets}}</div>
+          </ion-col>
+          <ion-col>
+            <div>{{visit.cleaned_outlets_percentage}}</div>
+          </ion-col>
+          <ion-col>
+            <div>{{visit.covered_outlets}}</div>
+          </ion-col>
+          <ion-col>
+            <div>{{visit.issue_outlets}}</div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <div>
+                {{visit.issue_outlets_percentage}}
+              </div>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>{{visit.planned_outlets}}</div>
+          </ion-col>
+
+     
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+  </div>
+
+</div>

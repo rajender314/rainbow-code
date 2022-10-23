@@ -1,0 +1,26 @@
+<!-- <upsell-body>
+
+  <div *ngIf="list">
+    <ng-container *ngTemplateOutlet="largeScreen;context:{list:list, page:currentPage}">
+    </ng-container>
+    <ion-infinite-scroll threshold="200px" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more records...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</upsell-body> -->
+
+
+<ng-template #mobileScreen let-list="list" let-page="page">
+  <ng-container *ngIf="smTemplate">
+    <ng-container *ngTemplateOutlet="smTemplate;context:{list:list, page:page}">
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #largeScreen let-list="list" let-page="page">
+  <ng-container *ngIf="lgTemplate">
+    <ng-container *ngTemplateOutlet="lgTemplate;context:{list:list, page:page}">
+    </ng-container>
+  </ng-container>
+</ng-template>

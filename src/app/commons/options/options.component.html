@@ -1,0 +1,16 @@
+<ion-list *ngIf="options">
+  <ion-list-header *ngIf="header">{{header}}</ion-list-header>
+  <ng-container *ngFor="let option of options">
+    <ion-item button="true" lines="none" *adjAuthCheck="option.permissions"
+      [ngClass]="{'selected':(selectedValue && (option.label == selectedValue.label))}" (click)="selectOption(option);">
+      <ion-icon *ngIf="option.icon" [name]="option.icon" slot="start"></ion-icon>
+      <ion-label>
+        <h3 *ngIf="option.label" class="ion-text-wrap">{{option.label}}</h3>
+        <ion-note *ngIf="option.description" class="ion-text-wrap">{{ option.description }}</ion-note>
+      </ion-label>
+      <ion-icon slot="end" color="secondary"
+        [ngClass]="{'selected':(selectedValue && (option.label == selectedValue.label))}" name="checkmark-sharp"
+        class="visible-on-hover"></ion-icon>
+    </ion-item>
+  </ng-container>
+</ion-list>

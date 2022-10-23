@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="end">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="task">{{task.task_name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="white-bg">
+  <div class="ion-padding white-bg">
+    <div class="ion-padding-horizontal">
+      <h1 *ngIf="task" class="bold light-mild">Assignment</h1>
+      <div class="ion-padding-bottom mild-light">
+        <span>{{task.instance.process.name}} <span class="light mild extra-small-font">&nbsp;
+            {{'Process' | uppercase}}</span>&nbsp;/&nbsp;</span>
+        <span>{{task.task_name}} <span class="light mild extra-small-font">&nbsp;
+            {{'Step' | uppercase}}</span></span>
+      </div>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm();">
+      <div border-box class="ion-padding-horizontal ion-padding-top ion-margin-top">
+        <div *ngFor="let field of task.form.fields" class="ion-margin-bottom">
+          <mat-form-field appearance="outline">
+            <mat-label>{{field.field_name}} <ion-icon name="star" class="small-font" *ngIf="field.required"></ion-icon>
+            </mat-label>
+            <input matInput [formControlName]="field.field_name" placeholder="" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="ion-text-right">
+        <ion-button class="ion-margin-horizontal" type="submit">Submit</ion-button>
+      </div>
+    </form>
+    <div class="ion-padding-vertical ion-padding-horizontal" *ngIf="historicalTasks && historicalTasks.length > 0">
+      <div>
+        <h5 class="mild">History</h5>
+      </div>
+      <div class="ion-padding-bottom">
+        <div class="border-box ion-margin-top ion-padding mat-elevation-z2" *ngFor="let task of historicalTasks">
+          <h5>{{task.task_name}} <ion-chip color="success">Completed</ion-chip>
+          </h5>
+          <ng-container *ngFor="let key of keys(task.data)">
+            <p class="light-mild"><span class="mild">{{key}}:</span>&nbsp;{{task.data[key]}}</p>
+          </ng-container>
+          <p class="mild small-font">Submitted at {{task.updated_at | date:'medium'}} <span *ngIf="task.submitted_by">by
+              {{task.submitted_by.name}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>

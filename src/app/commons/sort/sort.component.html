@@ -1,0 +1,12 @@
+<div *ngIf="options">
+  <div class="small-font mild ion-padding">Sort By</div>
+  <ion-item lines="none" *ngFor="let item of options" (click)="selectOption(item)"
+    [ngClass]="{'selected': (current && current.fieldName == item.value)}">
+    <ion-label>{{item.label}}</ion-label>
+    <ion-button slot="end" fill="clear" (click)="changeOrder($event, item)">
+      <ion-icon [color]="(current && current.fieldName == item.value) ? 'primary' :'dark'" class="mild"
+        [name]="item.meta.order == 'ASC'? 'arrow-down-outline' : 'arrow-up-outline'" slot="icon-only">
+      </ion-icon>
+    </ion-button>
+  </ion-item>
+</div>

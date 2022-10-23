@@ -1,0 +1,65 @@
+ion-spinner {
+    z-index: 999;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.img-section {
+    height: auto; 
+    min-height: 100px; 
+    max-height: 600px; 
+    overflow: scroll; 
+    display: flex; 
+    flex-wrap: wrap; 
+    padding: 20px;
+    .img-spinner-cls {
+        width: 160px; 
+        height: 150px;
+    }
+}
+
+.img-label {
+    margin: 0 0 12px; width: 100%; overflow: hidden; white-space: nowrap;
+            text-overflow: ellipsis; text-align: center; border-radius: 10px; background: #7e57c2;
+             color: #fff;    padding: 10px;
+
+}
+
+.accodian-bgColor {
+    background: #7e57c2 !important;
+    color: #fff;
+}
+.img-class {
+    width:100%;
+     height:250px;
+}
+.accordian-width {
+    width: 60%;
+    min-height: 250px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding-right: 10px;
+}
+.form-width {
+    width: 40%;
+    min-height: 250px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    margin-right: 10px;
+}
+.sectionClass {
+    min-height: 100%;display: flex;
+}
+.acordian-heading {
+    font-size: 14px;
+}
+.store-name-width {
+    width: 96% !important;
+}
+mat-form-field {
+    width: 300px;
+}

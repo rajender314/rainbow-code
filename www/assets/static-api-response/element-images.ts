@@ -1,0 +1,1 @@
+export const actual_coverage = {"image_url":0}

@@ -1,0 +1,201 @@
+<ion-header class="ion-no-border header-border">
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button (click)="close();">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end" *ngIf="mode && mode == EDIT_MODE">
+      <ion-button (click)="submitForm();">
+        <ion-icon name="send-outline" slot="start"></ion-icon>
+        Submit
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <rainbow-body>
+    <div *ngIf="user">
+      <div class="ion-padding white-bg">
+        <form [formGroup]="formGroup">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <mat-form-field appearance="outline">
+                  <mat-label>User Id<sup>*</sup>
+                  </mat-label>
+                  <input matInput formControlName="user_id" [readonly]="true" />
+                </mat-form-field>
+              </ion-col>
+              <ion-col>
+                <mat-form-field appearance="outline">
+                  <mat-label>Name<sup>*</sup>
+                  </mat-label>
+                  <input matInput formControlName="name" [readonly]="true" [readonly]="mode == VIEW_MODE" />
+                </mat-form-field>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col *ngIf="mode == VIEW_MODE">
+                <mat-form-field appearance="outline">
+                  <mat-label>Mobile Number<sup>*</sup>
+                  </mat-label>
+                  <input type="text" maxlength="10" matInput formControlName="mobile_number"
+                    [readonly]="mode == VIEW_MODE" />
+                </mat-form-field>
+              </ion-col>
+              <ion-col *ngIf="mode == EDIT_MODE">
+                <mat-form-field appearance="outline">
+                  <mat-label>Mobile Number<sup>*</sup></mat-label>
+                  
+                </mat-form-field>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <mat-form-field appearance="outline">
+                  <mat-label>Joining Date</mat-label>
+                  <input matInput formControlName="date_joined" [matDatepicker]="date_joined"
+                    [readonly]="mode == VIEW_MODE">
+                  <mat-datepicker-toggle matSuffix [for]="date_joined"></mat-datepicker-toggle>
+                  <mat-datepicker #date_joined></mat-datepicker>
+                </mat-form-field>
+              </ion-col>
+            </ion-row>
+            <ng-container *ngIf="mode == VIEW_MODE">
+              <ion-row>
+                <ion-col>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Role<sup>*</sup>
+                    </mat-label>
+                    <input type="text" matInput formControlName="role_name" [readonly]="true" />
+                  </mat-form-field>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Location<sup>*</sup>
+                    </mat-label>
+                    <input type="text" matInput formControlName="place_name" [readonly]="true" />
+                  </mat-form-field>
+                </ion-col>
+                <ion-col>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Device ID<sup>*</sup>
+                    </mat-label>
+                    <input type="text" matInput formControlName="device_id" [readonly]="true" />
+                  </mat-form-field>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Approved By<sup>*</sup>
+                    </mat-label>
+                    <input type="text" matInput formControlName="manager" [readonly]="true" />
+                  </mat-form-field>
+                </ion-col>
+              </ion-row>
+
+            </ng-container>
+
+            <ng-container *ngIf="mode == EDIT_MODE">
+              <ion-row>
+                <ion-col>
+                  <div class="multi-select-form-field ion-margin-vertical"
+                    [ngClass]="{'form-error': (roleControl.dirty || roleControl.touched) && roleControl.errors}">
+                    <div class="form-field-label">Role</div>
+                    <adj-multi-select #roles name="roles" [data]="((roles$ | async)?.data)" mapFn="v=>v" type="local"
+                      (selected)="handleRoleSelection($event)" [multiple]="false" idPropName="role_id"
+                      labelPropName="role_name"></adj-multi-select>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="multi-select-form-field ion-margin-vertical"
+                    [ngClass]="{'form-error': (locationControl.dirty || locationControl.touched) && locationControl.errors}">
+                    <div class="form-field-label">Location</div>
+                    <adj-multi-select #locations name="location" [data]="[]" mapFn="v=>v" type="local"
+                      (selected)="handleLocationSelection($event)" [multiple]="false" idPropName="id"
+                      labelPropName="name">
+                    </adj-multi-select>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="multi-select-form-field ion-margin-vertical"
+                    [ngClass]="{'form-error': (groupControl.dirty || groupControl.touched) && groupControl.errors}">
+                    <div class="form-field-label">Groups</div>
+                    <adj-multi-select #groups name="groups" [data]="((groups$ | async)?.data)" mapFn="v=>v" type="local"
+                      (selected)="handleGroupSelection($event)" idPropName="id" labelPropName="name">
+                    </adj-multi-select>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="multi-select-form-field ion-margin-vertical"
+                    [ngClass]="{'form-error': (managerControl.dirty || managerControl.touched) && managerControl.errors}">
+                    <div class="form-field-label">Manager</div>
+                    <adj-multi-select [viewTemplate]="userTemplate" #manager name="managers" [url]="apiDirectory.users"
+                      mapFn="response=>response.results" type="server" [multiple]="false"
+                      (selected)="handleManagerSelection($event);" idPropName="id" labelPropName="name">
+                    </adj-multi-select>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ng-container>
+
+            <ion-row>
+              <ion-col>
+                <mat-checkbox formControlName="is_active" color="primary">Active User
+                </mat-checkbox>
+                <p class="small-font mild">Active user are allowed to use the mobile application and portal</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <mat-checkbox formControlName="is_active" color="primary">Staff User
+                </mat-checkbox>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <mat-checkbox formControlName="is_active" color="primary">Approve User
+                </mat-checkbox>
+                <p class="small-font mild">Approved user are allowed to use the mobile application and portal</p>
+              </ion-col>
+            </ion-row>
+
+
+            <ng-container *ngIf="mode == EDIT_MODE">
+              <ion-row>
+                <ion-col>
+                  <div class="ion-padding">
+                    <ion-button type="submit" expand="block" (click)="submitForm();">
+                      <ion-icon name="send-outline" slot="start"></ion-icon>Submit
+                    </ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ng-container>
+          </ion-grid>
+        </form>
+      </div>
+    </div>
+  </rainbow-body>
+</ion-content>
+
+<ng-template #userTemplate let-user="option">
+  <div>
+    <div>{{user.name}}</div>
+    <div class="small-font mild" style="padding-top:4px">{{user.place?.name}} {{"|"}} {{user.role?.name}}</div>
+  </div>
+</ng-template>
